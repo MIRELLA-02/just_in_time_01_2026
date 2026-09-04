@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JustInTime</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <div id="loginPage" class="login-page">
+        <div class="login-box">
+            <div class="login-icon">
+                JT
+            </div>
+
+            <h1>Just In Time</h1>
+            <p>Gestão da Produção</p>
+            <form id="loginForm">
+                <div class="input-group">
+                    <label for="email">E-mail</label>
+                    <input type="email" id="email" placeholder="Digite seu e-mail">
+                </div>
+
+                <div class="input-group">
+                    <label for="senha">Senha</label>
+                    <input type="password" id="senha" placeholder="Digite sua senha">
+                </div>
+
+                <button type="submit" class="main-button">Entrar</button>
+                <span id="loginMensagem"></span>
+            </form>
+
+            <div class="test-login">
+                <strong>Dados para teste</strong>
+                <p>E-mail:<span>admin@jit.com</span>
+                </p>
+                <p>Senha:<span>123456</span>
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <div id="systemPage" class="system-page hidden">
+        <header class="header">
+            <div class="logo-area">
+                <div class="logo-icon">JIT</div>
+                <div>
+                    <h1>Just In Time</h1>
+                    <span>Gestão da Produção</span>
+                </div>
+            </div>
+
+            <div class="user-area">
+                <span id="userName">Administrador</span>
+                <button id="logoutButton" class="logout-button">Sair</button>
+            </div>
+        </header>
+
+        <div class="system-content">
+            <aside class="sidebar">
+                <button class="side-button active" data-page="homePage">Início</button>
+                <button class="side-button" data-page="productsPage">Produtos</button>
+                <button class="side-button" data-page="productionPage">Produção</button>
+            </aside>
+
+            <main class="main-content">
+                <section id="homePage" class="page">
+                    <div class="page-title">
+                        <h2>Início</h2>
+                        <p>Acompanhe as informações da produção.</p>
+                    </div>
+
+                    <div class="dashboard-cards">
+                        <div class="dashboard-card">
+                            <span class="card-title">Produtos cadastrados</span>
+                            <strong id="totalProducts">0</strong>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <span class="card-title">Estoque baixo</span>
+                            <strong id="lowStock">0</strong>
+                        </div>
+
+                        <div class="dashboard-card">
+                            <span class="card-title">Movimentações</span>
+                            <strong id="totalMovements">0</strong>
+                        </div>
+                    </div>
+
+                    <div class="info-box">
+                        <h3>Controle Just in Time</h3>
+                        <p>
+                            Utilize o sistema para cadastrar produtos,
+                            acompanhar o estoque e registrar as
+                            movimentações de produção e pedidos.
+                        </p>
+                    </div>
+                </section>
+
+                <section id="productsPage" class="page hidden">
+                    <div class="page-header">
+                        <div class="page-title">
+                            <h2>Produtos</h2>
+                            <p>Cadastre e gerencie os produtos.</p>
+                        </div>
+
+                        <button id="newProductButton" class="main-button"> + Novo produto </button>
+                    </div>
+
+                    <div class="search-box">
+                        <input type="text" id="searchProduct" placeholder="Pesquisar produto...">
+                    </div>
+
+                    <div class="table-container">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Produto</th>
+                                    <th>Descrição</th>
+                                    <th>Estoque</th>
+                                    <th>Mínimo</th>
+                                    <th>Ações</th>
+                                </tr>
+                            </thead>
+
+                            <tbody id="productsTable">
+                            </tbody>
+                        </table>
+                    </div>
+                </section>
+
+                <section id="productionPage" class="page hidden">
+                    <div class="page-title">
+                        <h2>Produção</h2>
+                        <p> Registre entradas e saídas do estoque.</p>
+                    </div>
+
+                    <div class="production-grid">
+                        <div class="form-card">
+                            <h3> Nova movimentação </h3>
+                            <form id="movementForm">
+                                <div class="input-group">
+                                    <label for="movementProduct"> Produto </label>
+                                    <select id="movementProduct">
+                                        <option value=""> Selecione um produto </option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="movementType">Tipo</label>
+                                    <select id="movementType">
+                                        <option value=""> Selecione o tipo </option>
+                                        <option value="fabricado"> Fabricado </option>
+                                        <option value="pedido"> Pedido </option>
+                                    </select>
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="movementQuantity"> Quantidade </label>
+                                    <input type="number" id="movementQuantity" min="1"
+                                        placeholder="Digite a quantidade">
+                                </div>
+
+                                <div class="input-group">
+                                    <label for="movementDate"> Data </label>
+                                    <input type="date" id="movementDate">
+                                </div>
+
+                                <button type="submit" class="main-button"> Registrar movimentação </button>
+                            </form>
+                        </div>
+
+
+                        <div class="stock-card">
+                            <h3>Estoque atual</h3>
+                            <div id="productionProducts">
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="history-card">
+                        <h3> Histórico de movimentações</h3>
+
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Data</th>
+                                        <th>Produto</th>
+                                        <th>Tipo</th>
+                                        <th>Quantidade</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="movementsTable">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+    </div>
+
+    <div id="productModal" class="modal hidden">
+        <div class="modal-box">
+            <div class="modal-header">
+                <h2 id="modalTitle">Novo produto</h2>
+                <button id="closeModal" class="close-button">X</button>
+            </div>
+
+
+            <form id="productForm">
+                <input type="hidden" id="productId">
+
+                <div class="input-group">
+                    <label for="productName">Nome do produto </label>
+                    <input type="text" id="productName" placeholder="Digite o nome do produto">
+                </div>
+
+
+                <div class="input-group">
+                    <label for="productDescription">Descrição</label>
+                    <textarea id="productDescription" placeholder="Digite a descrição do produto"></textarea>
+                </div>
+
+
+                <div class="form-row">
+                    <div class="input-group">
+                        <label for="productStock">Estoque</label>
+                        <input type="number" id="productStock" min="0" placeholder="0">
+
+                    </div>
+
+                    <div class="input-group">
+                        <label for="productMinimum">Estoque mínimo</label>
+                        <input type="number" id="productMinimum" min="0" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" id="cancelProduct" class="cancel-button">Cancelar</button>
+                    <button type="submit" class="main-button">Salvar produto</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+
+</body>
+</html>
